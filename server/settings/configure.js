@@ -1,0 +1,24 @@
+const router = require('../v1/routers');
+const bodyParser = require('body-parser');
+const errorMiddleware = require('../middlewares/errorMiddleware');
+const cookie = require('cookie-parser');
+const cors = require('cors');
+
+const configure = app => {
+	app.use(cors());
+
+	app.use(bodyParser.json());
+	app.use(bodyParser.urlencoded({extended: true}));
+
+	app.use(cookie());
+
+	app.use(router);
+
+	app.use('*', (req, res) => {
+		res.status(404).json({message: 'Page not found'});
+	});
+
+	app.use(errorMiddleware);
+};
+
+module.exports = configure;
