@@ -14,8 +14,6 @@ class MailService {
 	}
 
 	async sendActivationMail(to, link) {
-		return;
-
 		await this.transporter.sendMail({
 			from: process.env.SMTP_USER,
 			to,

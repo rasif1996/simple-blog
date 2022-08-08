@@ -5,7 +5,12 @@ const cookie = require('cookie-parser');
 const cors = require('cors');
 
 const configure = app => {
-	app.use(cors());
+	app.use(
+		cors({
+			origin: process.env.CLIENT_URL,
+			credentials: true
+		})
+	);
 
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({extended: true}));

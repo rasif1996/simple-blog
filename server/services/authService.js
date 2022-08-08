@@ -4,17 +4,16 @@ const bcryptService = require('./bcryptService');
 const {v4} = require('uuid');
 const UserDto = require('../dtos/userDto');
 const tokenService = require('./tokenService');
-const mailService = require('./mailService');
 
 class AuthService {
 	async registration(email, password) {
 		const hashPassword = bcryptService.encrypt(password);
 		const activationLink = v4();
 
-		await mailService.sendActivationMail(
-			email,
-			`${process.env.SERVER_URL}:${process.env.PORT}/activate/${activationLink}`
-		);
+		// await mailService.sendActivationMail(
+		// 	email,
+		// 	`${process.env.SERVER_URL}:${process.env.PORT}/activate/${activationLink}`
+		// );
 
 		const user = await UserModel.create({email, password: hashPassword, activationLink});
 		const userDto = new UserDto(user);

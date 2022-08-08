@@ -1,0 +1,15 @@
+.list {
+	list-style: none;
+	display: flex;
+}
+
+.item {
+	&:not(:last-child) {
+		margin-right: 14px;
+	}
+}
+
+.link {
+	text-decoration: none;
+	color: black;
+}
