@@ -1,7 +1,7 @@
-import api from '../../http';
+import AuthService from '../../services/AuthService';
 
 const initialState = {
-	isAuth: false
+	isAuthorized: false
 };
 
 const auth = {
@@ -9,33 +9,35 @@ const auth = {
 	state: initialState,
 	reducers: {
 		changeAuth(state, payload) {
-			state.isAuth = payload;
+			state.isAuthorized = payload;
 		}
 	},
-	effects: dispatch => ({
-		async registration({email, password, passwordConfirmation}) {
-			await api.auth.registration({email, password, passwordConfirmation});
+	effects: ({auth, user}) => ({
+		async registration(credentials) {
+			await AuthService.registration(credentials);
 		},
-		async login({email, password}) {
-			const {data} = await api.auth.login({email, password});
+		async login(credentials) {
+			const data = await AuthService.login(credentials);
 
-			dispatch.auth.changeAuth(true);
-			dispatch.user.setUser(data.user);
-
-			localStorage.setItem('accessToken', data.accessToken);
+			auth.changeAuth(true);
+			user.setUser(data.user);
 		},
 		async logout() {
-			await api.auth.logout();
+			await AuthService.logout();
 
-			dispatch.auth.changeAuth(false);
-			dispatch.user.clearUser();
+			auth.changeAuth(false);
+			user.clearUser();
+		},
+		async refresh() {
+			const data = await AuthService.refresh();
 
-			localStorage.removeItem('accessToken');
+			auth.changeAuth(true);
+			user.setUser(data.user);
 		}
 	}),
 	selectors: slice => ({
-		getIsAuth() {
-			return slice(state => state.isAuth);
+		getIsAuthorized() {
+			return slice(state => state.isAuthorized);
 		}
 	})
 };

@@ -1,16 +1,20 @@
 import {BrowserRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import Router from './Router';
-import '../styles/index.scss';
+import AuthProvider from './AuthProvider';
+
+import './styles/index.scss';
 
 import store from '../client';
 
 function App() {
 	return (
 		<Provider store={store}>
-			<BrowserRouter>
-				<Router />
-			</BrowserRouter>
+			<AuthProvider>
+				<BrowserRouter>
+					<Router />
+				</BrowserRouter>
+			</AuthProvider>
 		</Provider>
 	);
 }

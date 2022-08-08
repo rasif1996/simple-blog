@@ -1,4 +1,4 @@
-import api from '../../http';
+import UserService from '../../services/UserService';
 
 const initialState = {
 	email: '',
@@ -22,11 +22,11 @@ const user = {
 			state.users = [...payload];
 		}
 	},
-	effects: dispatch => ({
+	effects: ({user}) => ({
 		async fetchUsers(payload, store) {
-			const {data} = await api.users.getUsers();
+			const data = await UserService.getUsers();
 
-			dispatch.user.setUsers(data.users);
+			user.setUsers(data.users);
 		}
 	}),
 	selectors: slice => ({

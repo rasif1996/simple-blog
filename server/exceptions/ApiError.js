@@ -18,7 +18,7 @@ class ApiError extends Error {
 	}
 
 	static Unathorized() {
-		return new ApiError(404, 'Unathorized');
+		return new ApiError(401, 'Unathorized');
 	}
 }
 

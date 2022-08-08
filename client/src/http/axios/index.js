@@ -1,6 +1,8 @@
 import axios from 'axios';
-import api from '..';
 import {SERVER_URL} from '../../common/config';
+import {STATUSES} from '../../common/constants';
+import {getToken} from '../../common/utils';
+import AuthService from '../../services/AuthService';
 
 export const publicAxios = axios.create({
 	baseURL: SERVER_URL,
@@ -12,29 +14,34 @@ export const privateAxios = axios.create({
 	withCredentials: true
 });
 
-privateAxios.interceptors.request.use(request => {
-	const accessToken = localStorage.getItem('accessToken');
+privateAxios.interceptors.request.use(
+	async request => {
+		const accessToken = getToken();
 
-	request.headers.authorization = `Bearer ${accessToken}`;
+		request.headers.authorization = `Bearer ${accessToken}`;
 
-	return request;
-});
+		return request;
+	},
+	e => Promise.reject(e)
+);
 
 privateAxios.interceptors.response.use(
-	response => response,
+	async response => response,
 	async error => {
-		const request = error.request;
+		const originalRequest = error.config;
 
-		if (request && !request.isFirst) {
-			request.isFirst = true;
+		const {status} = error.response;
+
+		if (status === STATUSES.UNAUTHORIZED && originalRequest && !originalRequest._isRetry) {
+			originalRequest._isRetry = true;
 
 			try {
-				const {data} = await api.auth.refresh();
+				await AuthService.refresh();
 
-				localStorage.setItem('accessToken', data.accessToken);
-
-				return await axios(request);
+				return privateAxios.request(originalRequest);
 			} catch (e) {}
 		}
+
+		return Promise.reject(error);
 	}
 );

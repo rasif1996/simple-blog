@@ -8,7 +8,7 @@ function Nav() {
 		select: {auth}
 	} = useStore();
 
-	const isAuth = useSelector(auth.getIsAuth);
+	const isAuthorized = useSelector(auth.getIsAuthorized);
 
 	const {
 		auth: {logout}
@@ -37,7 +37,7 @@ function Nav() {
 						Signup
 					</Link>
 				</li>
-				{isAuth && (
+				{isAuthorized && (
 					<li className={styles.item}>
 						<button onClick={logout}>Log out</button>
 					</li>
