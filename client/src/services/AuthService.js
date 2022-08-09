@@ -15,9 +15,9 @@ class AuthService {
 	}
 
 	async logout() {
-		await api.auth.logout();
-
 		removeToken();
+
+		await api.auth.logout();
 	}
 
 	async refresh() {

@@ -10,11 +10,11 @@ const user = {
 	name: 'user',
 	state: initialState,
 	reducers: {
-		setUser(state, payload) {
+		login(state, payload) {
 			state.email = payload.email;
 			state.id = payload.id;
 		},
-		clearUser(state) {
+		logout(state) {
 			state.email = '';
 			state.id = '';
 		},

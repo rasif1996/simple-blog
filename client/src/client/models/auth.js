@@ -1,43 +1,53 @@
 import AuthService from '../../services/AuthService';
 
-const initialState = {
-	isAuthorized: false
-};
+const initialState = false;
 
 const auth = {
 	name: 'auth',
 	state: initialState,
 	reducers: {
-		changeAuth(state, payload) {
-			state.isAuthorized = payload;
-		}
+		'user/login': () => true,
+		'user/logout': () => false
 	},
-	effects: ({auth, user}) => ({
+	effects: ({user}) => ({
 		async registration(credentials) {
-			await AuthService.registration(credentials);
+			try {
+				await AuthService.registration(credentials);
+			} catch (e) {
+				console.log(e);
+			}
 		},
 		async login(credentials) {
-			const data = await AuthService.login(credentials);
+			try {
+				const data = await AuthService.login(credentials);
 
-			auth.changeAuth(true);
-			user.setUser(data.user);
+				user.login(data.user);
+			} catch (e) {
+				console.log(e);
+			}
 		},
 		async logout() {
-			await AuthService.logout();
+			try {
+				await AuthService.logout();
 
-			auth.changeAuth(false);
-			user.clearUser();
+				user.logout();
+			} catch (e) {
+				console.log(e);
+			}
 		},
 		async refresh() {
-			const data = await AuthService.refresh();
+			try {
+				const data = await AuthService.refresh();
 
-			auth.changeAuth(true);
-			user.setUser(data.user);
+				user.login(data.user);
+			} catch (e) {
+				console.log(e);
+			}
 		}
 	}),
 	selectors: slice => ({
 		getIsAuthorized() {
-			return slice(state => state.isAuthorized);
+			return slice(state => state);
 		}
 	})
 };

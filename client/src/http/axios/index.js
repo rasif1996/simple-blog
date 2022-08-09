@@ -3,6 +3,7 @@ import {SERVER_URL} from '../../common/config';
 import {STATUSES} from '../../common/constants';
 import {getToken} from '../../common/utils';
 import AuthService from '../../services/AuthService';
+import store from '../../client';
 
 export const publicAxios = axios.create({
 	baseURL: SERVER_URL,
@@ -39,7 +40,11 @@ privateAxios.interceptors.response.use(
 				await AuthService.refresh();
 
 				return privateAxios.request(originalRequest);
-			} catch (e) {}
+			} catch (e) {
+				store.dispatch({type: 'auth/logout'});
+
+				return;
+			}
 		}
 
 		return Promise.reject(error);
