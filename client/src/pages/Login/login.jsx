@@ -4,6 +4,7 @@ import {useDispatch} from 'react-redux';
 import styles from './login.module.scss';
 
 function Login() {
+	const [errors, setErrors] = useState();
 	const [values, setValues] = useState({email: '', password: ''});
 
 	const {
@@ -13,7 +14,9 @@ function Login() {
 	const handleSubmit = async e => {
 		e.preventDefault();
 
-		await login(values);
+		const errors = await login(values);
+
+		setErrors(errors);
 	};
 
 	const handleChange = e => {
@@ -38,6 +41,10 @@ function Login() {
 				placeholder='Password'
 				onChange={handleChange}
 			/>
+			{errors &&
+				errors.map(error => {
+					return <p key={error.param}>{error.msg}</p>;
+				})}
 			<button type='submit'>Log In</button>
 		</form>
 	);

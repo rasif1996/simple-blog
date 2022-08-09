@@ -24,9 +24,13 @@ const user = {
 	},
 	effects: ({user}) => ({
 		async fetchUsers(payload, store) {
-			const data = await UserService.getUsers();
+			try {
+				const data = await UserService.getUsers();
 
-			user.setUsers(data.users);
+				user.setUsers(data.users);
+			} catch {
+				user.setUsers([]);
+			}
 		}
 	}),
 	selectors: slice => ({

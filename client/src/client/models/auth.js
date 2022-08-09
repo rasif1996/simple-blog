@@ -14,7 +14,7 @@ const auth = {
 			try {
 				await AuthService.registration(credentials);
 			} catch (e) {
-				console.log(e);
+				return e.response?.data?.errors;
 			}
 		},
 		async login(credentials) {
@@ -23,26 +23,18 @@ const auth = {
 
 				user.login(data.user);
 			} catch (e) {
-				console.log(e);
+				return e.response?.data?.errors;
 			}
 		},
 		async logout() {
-			try {
-				await AuthService.logout();
+			await AuthService.logout();
 
-				user.logout();
-			} catch (e) {
-				console.log(e);
-			}
+			user.logout();
 		},
 		async refresh() {
-			try {
-				const data = await AuthService.refresh();
+			const data = await AuthService.refresh();
 
-				user.login(data.user);
-			} catch (e) {
-				console.log(e);
-			}
+			user.login(data.user);
 		}
 	}),
 	selectors: slice => ({

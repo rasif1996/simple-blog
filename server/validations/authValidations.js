@@ -32,6 +32,10 @@ exports.registrationValidation = [
 ];
 
 exports.loginValidation = [
-	check('email').exists().withMessage('Поле email обязательно'),
-	check('password').exists().withMessage('Поле password обязательно')
+	check('email').exists().withMessage('Поле email обязательно').isEmail().withMessage('Невалидная почта'),
+	check('password')
+		.exists()
+		.withMessage('Поле password обязательно')
+		.isLength({min: 3, max: 20})
+		.withMessage('Невалидный пароль')
 ];

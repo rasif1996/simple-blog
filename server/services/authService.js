@@ -25,11 +25,11 @@ class AuthService {
 		const user = await UserModel.findOne({email});
 
 		if (!user) {
-			throw ApiError.BadRequest('Данный email не существует');
+			throw ApiError.BadRequest('Данный email не существует', [{param: 'email', msg: 'Почта существует'}]);
 		}
 
 		if (!bcryptService.compare(password, user.password)) {
-			throw ApiError.BadRequest('Неверный пароль');
+			throw ApiError.BadRequest('Неверный пароль', [{param: 'password', msg: 'Неверный пароль'}]);
 		}
 
 		const userDto = new UserDto(user);
