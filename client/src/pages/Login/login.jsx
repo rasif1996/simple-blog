@@ -1,50 +1,24 @@
-import {useState} from 'react';
-import {useDispatch} from 'react-redux';
+import Input from '../../common/ui/Input/input';
+import useOwnForm from '../../hooks/useOwnForm';
+import schema from '../../common/validations/loginValidation';
 
 import styles from './login.module.scss';
 
 function Login() {
-	const [errors, setErrors] = useState();
-	const [values, setValues] = useState({email: '', password: ''});
-
 	const {
-		auth: {login}
-	} = useDispatch();
+		register,
+		handleSubmit,
+		formState: {errors}
+	} = useOwnForm({schema});
 
-	const handleSubmit = async e => {
-		e.preventDefault();
-
-		const errors = await login(values);
-
-		setErrors(errors);
-	};
-
-	const handleChange = e => {
-		setValues({...values, [e.target.name]: e.target.value});
+	const onSubmit = async data => {
+		console.log(data);
 	};
 
 	return (
-		<form className={styles.form} onSubmit={handleSubmit}>
-			<input
-				className={styles.input}
-				type='text'
-				name='email'
-				value={values.email}
-				placeholder='Email'
-				onChange={handleChange}
-			/>
-			<input
-				className={styles.input}
-				type='text'
-				name='password'
-				value={values.password}
-				placeholder='Password'
-				onChange={handleChange}
-			/>
-			{errors &&
-				errors.map(error => {
-					return <p key={error.param}>{error.msg}</p>;
-				})}
+		<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+			<Input label='Почта: ' name='email' register={register} errors={errors} />
+			<Input label='Пароль: ' name='password' register={register} errors={errors} />
 			<button type='submit'>Log In</button>
 		</form>
 	);
