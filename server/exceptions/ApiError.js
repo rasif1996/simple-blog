@@ -10,11 +10,11 @@ class ApiError extends Error {
 	}
 
 	static BadRequest(message, errors) {
-		return new ApiError(400, `Bad request: ${message}`, errors);
+		return new ApiError(400, message, errors);
 	}
 
 	static Conflict(message, errors) {
-		return new ApiError(409, `Conflict: ${message}`, erorrs);
+		return new ApiError(409, message, erorrs);
 	}
 
 	static Unathorized() {

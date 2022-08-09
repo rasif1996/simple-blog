@@ -9,7 +9,9 @@ const middleware =
 		const errors = validationResult(req);
 
 		if (!errors.isEmpty()) {
-			return next(ApiError.BadRequest('Введенные данные неверные', errors.array({onlyFirstError: true})));
+			const errorsArray = errors.array({onlyFirstError: true});
+
+			return next(ApiError.BadRequest(errorsArray[0].msg, errorsArray));
 		}
 
 		next();

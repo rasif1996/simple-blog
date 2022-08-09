@@ -1,4 +1,5 @@
 import AuthService from '../../services/AuthService';
+import SubmissionError from '../../common/exceptions/SubmissionError';
 
 const initialState = false;
 
@@ -14,7 +15,7 @@ const auth = {
 			try {
 				await AuthService.registration(credentials);
 			} catch (e) {
-				return e.response?.data?.errors;
+				throw new SubmissionError(e?.response?.data?.message);
 			}
 		},
 		async login(credentials) {
@@ -23,7 +24,7 @@ const auth = {
 
 				user.login(data.user);
 			} catch (e) {
-				return e.response?.data?.errors;
+				throw new SubmissionError(e?.response?.data?.message);
 			}
 		},
 		async logout() {

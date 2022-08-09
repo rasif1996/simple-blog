@@ -1,59 +1,29 @@
-import {useState} from 'react';
+import useForm from '../../hooks/useHookForm';
 import {useDispatch} from 'react-redux';
+import Input from '../../common/ui/Input/input';
 
 import styles from './signup.module.scss';
 
 function Signup() {
-	const [errors, setErrors] = useState();
-	const [values, setValues] = useState({email: '', password: '', passwordConfirmation: ''});
-
 	const {
 		auth: {registration}
 	} = useDispatch();
 
-	const handleSubmit = async e => {
-		e.preventDefault();
-
-		const errors = await registration(values);
-
-		setErrors(errors);
-	};
-
-	const handleChange = e => {
-		setValues({...values, [e.target.name]: e.target.value});
-	};
+	const {
+		register,
+		handleSubmit,
+		formState: {errors, isSubmitting}
+	} = useForm({validate: 'registration'});
 
 	return (
-		<form className={styles.form} onSubmit={handleSubmit}>
-			<input
-				className={styles.input}
-				type='text'
-				name='email'
-				value={values.email}
-				placeholder='Email'
-				onChange={handleChange}
-			/>
-			<input
-				className={styles.input}
-				type='text'
-				name='password'
-				value={values.password}
-				placeholder='Password'
-				onChange={handleChange}
-			/>
-			<input
-				className={styles.input}
-				type='text'
-				name='passwordConfirmation'
-				value={values.passwordConfirmation}
-				placeholder='Confirm password'
-				onChange={handleChange}
-			/>
-			{errors &&
-				errors.map(error => {
-					return <p key={error.param}>{error.msg}</p>;
-				})}
-			<button type='submit'>Sign Up</button>
+		<form className={styles.form} onSubmit={handleSubmit(registration)}>
+			<Input label='Почта:' name='email' register={register} errors={errors} />
+			<Input label='Пароль:' name='password' register={register} errors={errors} />
+			<Input label='Пароль:' name='passwordConfirmation' register={register} errors={errors} />
+			{errors && errors.submission && <p>{errors.submission.message}</p>}
+			<button type='submit' disabled={isSubmitting}>
+				Sign Up
+			</button>
 		</form>
 	);
 }
