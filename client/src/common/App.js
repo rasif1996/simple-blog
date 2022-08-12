@@ -1,21 +1,21 @@
-import {BrowserRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import Router from './Router';
 import AuthProvider from './AuthProvider';
 import ErrorBoundary from './components/ErrorBoundary';
+import {unstable_HistoryRouter as HistoryRouter} from 'react-router-dom';
+import history from './history';
+import store from '../client';
 
 import './styles/index.scss';
-
-import store from '../client';
 
 function App() {
 	return (
 		<Provider store={store}>
 			<ErrorBoundary>
 				<AuthProvider>
-					<BrowserRouter>
+					<HistoryRouter history={history}>
 						<Router />
-					</BrowserRouter>
+					</HistoryRouter>
 				</AuthProvider>
 			</ErrorBoundary>
 		</Provider>

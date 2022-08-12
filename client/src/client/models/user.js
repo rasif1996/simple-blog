@@ -17,6 +17,7 @@ const user = {
 		logout(state) {
 			state.email = '';
 			state.id = '';
+			state.users = [];
 		},
 		setUsers(state, payload) {
 			state.users = [...payload];
