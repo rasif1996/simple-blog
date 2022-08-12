@@ -4,12 +4,34 @@
 }
 
 .item {
-	&:not(:last-child) {
-		margin-right: 14px;
+	list-style: none;
+	position: relative;
+
+	&:hover > .subList {
+		display: block;
 	}
+}
+
+.item-margin {
+	margin-right: 10px;
 }
 
 .link {
 	text-decoration: none;
 	color: black;
+}
+
+.subList {
+	display: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	min-width: 80px;
+	max-width: 160px;
+	background-color: #dadada;
+}
+
+.underSubList {
+	left: 100%;
+	top: 0;
 }

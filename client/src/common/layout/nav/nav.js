@@ -1,5 +1,6 @@
-import {Link} from 'react-router-dom';
 import {useDispatch, useSelector, useStore} from 'react-redux';
+import menuItems from '../../routes/menuItems';
+import NavItem from './NavItem';
 
 import styles from './nav.module.scss';
 
@@ -17,26 +18,9 @@ function Nav() {
 	return (
 		<nav>
 			<ul className={styles.list}>
-				<li className={styles.item}>
-					<Link className={styles.link} to='/'>
-						Home
-					</Link>
-				</li>
-				<li className={styles.item}>
-					<Link className={styles.link} to='/users'>
-						Users
-					</Link>
-				</li>
-				<li className={styles.item}>
-					<Link className={styles.link} to='/login'>
-						Login
-					</Link>
-				</li>
-				<li className={styles.item}>
-					<Link className={styles.link} to='/signup'>
-						Signup
-					</Link>
-				</li>
+				{menuItems.map((item, index) => (
+					<NavItem key={`${item.label}-${index}`} item={item} />
+				))}
 				{isAuthorized && (
 					<li className={styles.item}>
 						<button onClick={logout}>Log out</button>
