@@ -1,5 +1,5 @@
-import {removeToken, setToken} from '../common/utils';
-import api from '../http';
+import {removeToken, setToken} from 'common/utils';
+import api from 'http';
 
 class AuthService {
 	async registration(credentials) {

@@ -1,4 +1,4 @@
-import SubmissionError from '../common/exceptions/SubmissionError';
+import SubmissionError from 'common/exceptions/SubmissionError';
 
 const withFormErrorHandler = (onSubmit, setError, clearErrors) => {
 	return async (...args) => {

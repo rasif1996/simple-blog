@@ -1,9 +1,9 @@
 import axios from 'axios';
-import {SERVER_URL} from '../../common/config';
-import {STATUSES} from '../../common/constants';
-import {getToken} from '../../common/utils';
-import AuthService from '../../services/AuthService';
-import store from '../../client';
+import {SERVER_URL} from 'common/config';
+import {STATUSES} from 'common/constants';
+import {getToken} from 'common/utils';
+import AuthService from 'services/AuthService';
+import store from 'client';
 
 export const publicAxios = axios.create({
 	baseURL: SERVER_URL,

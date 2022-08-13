@@ -1,5 +1,5 @@
-import Input from '../../common/ui/Input/input';
-import useForm from '../../hooks/useHookForm';
+import Input from 'common/ui/Input/input';
+import useForm from 'hooks/useHookForm';
 import {useDispatch} from 'react-redux';
 
 import styles from './login.module.scss';

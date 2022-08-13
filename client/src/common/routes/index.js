@@ -1,11 +1,11 @@
-import homeRoutes from '../../pages/Home/routes';
-import loginRoutes from '../../pages/Login/routes';
-import signupRoutes from '../../pages/Signup/routes';
-import usersRoutes from '../../pages/Users/routes';
-import notFoundRotes from '../../pages/NotFound/routes';
+import homeRoutes from 'pages/Home/routes';
+import loginRoutes from 'pages/Login/routes';
+import signupRoutes from 'pages/Signup/routes';
+import usersRoutes from 'pages/Users/routes';
+import notFoundRotes from 'pages/NotFound/routes';
 
-import RequireAuth from '../components/RequireAuth';
-import RequireGuest from '../components/RequireGuest';
+import RequireAuth from 'common/components/RequireAuth';
+import RequireGuest from 'common/components/RequireGuest';
 
 import Layout from '../layout';
 

@@ -1,7 +1,7 @@
 import {useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
-import withFormErrorHandler from '../hocs/withFormErrorHandler';
-import * as validations from '../common/validates';
+import withFormErrorHandler from 'hocs/withFormErrorHandler';
+import * as validations from 'common/validates';
 
 function useHookForm({validate, ...settings} = {}) {
 	const schema = validations[validate];

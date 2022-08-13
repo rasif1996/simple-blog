@@ -1,6 +1,6 @@
-import AuthService from '../../services/AuthService';
-import SubmissionError from '../../common/exceptions/SubmissionError';
-import history from '../../common/history';
+import AuthService from 'services/AuthService';
+import SubmissionError from 'common/exceptions/SubmissionError';
+import history from 'common/history';
 
 const initialState = false;
 

@@ -1,6 +1,6 @@
-import useForm from '../../hooks/useHookForm';
+import useForm from 'hooks/useHookForm';
 import {useDispatch} from 'react-redux';
-import Input from '../../common/ui/Input/input';
+import Input from 'common/ui/Input/input';
 
 import styles from './signup.module.scss';
 

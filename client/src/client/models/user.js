@@ -1,4 +1,4 @@
-import UserService from '../../services/UserService';
+import UserService from 'services/UserService';
 
 const initialState = {
 	email: '',
@@ -19,7 +19,7 @@ const user = {
 		}
 	},
 	effects: ({user}) => ({
-		async fetchUsers(payload, store) {
+		async fetchUsers() {
 			try {
 				const data = await UserService.getUsers();
 
