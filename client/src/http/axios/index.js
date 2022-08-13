@@ -16,12 +16,12 @@ export const privateAxios = axios.create({
 });
 
 privateAxios.interceptors.request.use(
-	async request => {
+	async config => {
 		const accessToken = getToken();
 
-		request.headers.authorization = `Bearer ${accessToken}`;
+		config.headers.authorization = `Bearer ${accessToken}`;
 
-		return request;
+		return config;
 	},
 	e => Promise.reject(e)
 );
@@ -29,19 +29,19 @@ privateAxios.interceptors.request.use(
 privateAxios.interceptors.response.use(
 	async response => response,
 	async error => {
-		const originalRequest = error.config;
+		const originalConfig = error.config;
 
 		const {status} = error.response;
 
-		if (status === STATUSES.UNAUTHORIZED && originalRequest && !originalRequest._isRetry) {
-			originalRequest._isRetry = true;
+		if (status === STATUSES.UNAUTHORIZED && originalConfig && !originalConfig._retry) {
+			originalConfig._retry = true;
 
 			try {
 				await AuthService.refresh();
 
-				return privateAxios.request(originalRequest);
+				return privateAxios(originalConfig);
 			} catch (e) {
-				store.dispatch({type: 'auth/logout'});
+				store.dispatch({type: 'user/logout'});
 
 				return;
 			}

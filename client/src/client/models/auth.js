@@ -11,7 +11,7 @@ const auth = {
 		'user/login': () => true,
 		'user/logout': () => false
 	},
-	effects: ({user}) => ({
+	effects: dispatch => ({
 		async registration(credentials) {
 			try {
 				await AuthService.registration(credentials);
@@ -25,7 +25,7 @@ const auth = {
 			try {
 				const data = await AuthService.login(credentials);
 
-				user.login(data.user);
+				dispatch.user.login(data.user);
 			} catch (e) {
 				throw new SubmissionError(e?.response?.data?.message);
 			}
@@ -33,12 +33,12 @@ const auth = {
 		async logout() {
 			await AuthService.logout();
 
-			user.logout();
+			dispatch({type: 'user/logout'});
 		},
 		async refresh() {
 			const data = await AuthService.refresh();
 
-			user.login(data.user);
+			dispatch.user.login(data.user);
 		}
 	}),
 	selectors: slice => ({

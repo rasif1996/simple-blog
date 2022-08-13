@@ -14,11 +14,6 @@ const user = {
 			state.email = payload.email;
 			state.id = payload.id;
 		},
-		logout(state) {
-			state.email = '';
-			state.id = '';
-			state.users = [];
-		},
 		setUsers(state, payload) {
 			state.users = [...payload];
 		}

@@ -46,7 +46,7 @@ class AuthService {
 
 	async logout(refreshToken) {
 		if (!refreshToken) {
-			throw ApiError.BadRequest('Нет токена');
+			throw ApiError.Unathorized();
 		}
 
 		const token = await tokenService.removeToken(refreshToken);

@@ -5,6 +5,18 @@ import selectPlugin from '@rematch/select';
 
 import * as models from './models';
 
-const store = init({models, plugins: [immerPlugin(), loadingPlugin(), selectPlugin()]});
+const actionsBlacklist = ['loading/show', 'loading/hide'];
+
+const store = init({
+	models,
+	redux: {
+		devtoolOptions: {
+			actionsBlacklist,
+			disabled: false
+		},
+		rootReducers: {'user/logout': () => undefined}
+	},
+	plugins: [immerPlugin(), loadingPlugin(), selectPlugin()]
+});
 
 export default store;

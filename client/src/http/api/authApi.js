@@ -1,4 +1,4 @@
-import {publicAxios} from '../axios';
+import {privateAxios, publicAxios} from '../axios';
 
 const api = {
 	async registration(data) {
@@ -8,10 +8,10 @@ const api = {
 		return await publicAxios.post('/api/auth/login', data);
 	},
 	async logout() {
-		return await publicAxios.post('/api/auth/logout');
+		return await privateAxios.post('/api/auth/logout');
 	},
 	async refresh() {
-		return await publicAxios.post('/api/auth/refresh');
+		return await privateAxios.post('/api/auth/refresh');
 	}
 };
 
