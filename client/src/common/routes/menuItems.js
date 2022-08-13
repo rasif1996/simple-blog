@@ -4,6 +4,11 @@ const menuItems = [
 		to: '/'
 	},
 	{
+		label: 'Account',
+		to: '/account',
+		authRequired: true
+	},
+	{
 		label: 'Users',
 		to: '/users'
 	},

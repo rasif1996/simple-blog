@@ -5,13 +5,13 @@ import selectPlugin from '@rematch/select';
 
 import * as models from './models';
 
-const actionsBlacklist = ['loading/show', 'loading/hide'];
+const actionsDenylist = ['loading/show', 'loading/hide'];
 
 const store = init({
 	models,
 	redux: {
 		devtoolOptions: {
-			actionsBlacklist,
+			actionsDenylist,
 			disabled: false
 		},
 		rootReducers: {'user/logout': () => undefined}
