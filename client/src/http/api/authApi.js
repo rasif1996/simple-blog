@@ -11,7 +11,7 @@ const api = {
 		return await privateAxios.post('/api/auth/logout');
 	},
 	async refresh() {
-		return await privateAxios.post('/api/auth/refresh');
+		return await publicAxios.get('/api/auth/refresh');
 	}
 };
 

@@ -6,7 +6,7 @@ const validate = require('../../middlewares/validationMiddleware');
 router.post('/registration', validate(registrationValidation), authController.registration);
 router.post('/login', validate(loginValidation), authController.login);
 router.post('/logout', authController.logout);
-router.post('/refresh', authController.refresh);
+router.get('/refresh', authController.refresh);
 router.get('/activate/:link', authController.activate);
 
 module.exports = router;
