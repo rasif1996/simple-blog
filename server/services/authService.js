@@ -4,6 +4,7 @@ const bcryptService = require('./bcryptService');
 const {v4} = require('uuid');
 const UserDto = require('../dtos/userDto');
 const tokenService = require('./tokenService');
+const AccountDto = require('../dtos/accountDto');
 
 class AuthService {
 	async registration(email, password) {
@@ -33,6 +34,7 @@ class AuthService {
 		}
 
 		const userDto = new UserDto(user);
+		const accountDto = new AccountDto(user);
 
 		const tokens = tokenService.generateTokens({...userDto});
 
@@ -40,7 +42,10 @@ class AuthService {
 
 		return {
 			...tokens,
-			user: userDto
+			user: {
+				...userDto,
+				info: accountDto
+			}
 		};
 	}
 
@@ -68,13 +73,17 @@ class AuthService {
 
 		const user = await UserModel.findOne({email: token.email});
 		const userDto = new UserDto(user);
+		const accountDto = new AccountDto(user);
 
 		const tokens = tokenService.generateTokens({...userDto});
 		await tokenService.saveToken(userDto.id, tokens.refreshToken);
 
 		return {
 			...tokens,
-			user: userDto
+			user: {
+				...userDto,
+				info: accountDto
+			}
 		};
 	}
 

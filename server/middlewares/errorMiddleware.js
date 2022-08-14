@@ -7,7 +7,7 @@ const middleware = (err, req, res, next) => {
 		return res.status(err.status).json({message: err.message, status: err.status, errors: err.errors});
 	}
 
-	return res.status(500).json({message: 'Непредвиденная ошибка', status: 500});
+	return res.status(500).json({message: 'Непредвиденная ошибка', error: err.message, status: 500});
 };
 
 module.exports = middleware;

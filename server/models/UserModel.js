@@ -17,6 +17,18 @@ const schema = new Schema({
 	activationLink: {
 		type: String,
 		required: true
+	},
+	name: {
+		type: String
+	},
+	surname: {
+		type: String
+	},
+	age: {
+		type: Number
+	},
+	image: {
+		type: String
 	}
 });
 

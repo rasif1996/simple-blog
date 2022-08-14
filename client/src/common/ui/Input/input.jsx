@@ -1,11 +1,11 @@
 import styles from './input.module.scss';
 
-function Input({label, name, register, errors}) {
+function Input({label, name, register, errors, ...rest}) {
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.container}>
 				<span className={styles.label}>{label}</span>
-				<input className={styles.input} type='text' {...register(name)} />
+				<input className={styles.input} type='text' {...register(name)} {...rest} />
 			</div>
 			{errors && errors[name] && <p className={styles.error}>{errors[name].message}</p>}
 		</div>

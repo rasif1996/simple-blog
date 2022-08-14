@@ -3,6 +3,7 @@ import loginRoutes from 'pages/Login/routes';
 import signupRoutes from 'pages/Signup/routes';
 import usersRoutes from 'pages/Users/routes';
 import notFoundRotes from 'pages/NotFound/routes';
+import accountRoutes from 'pages/Account/routes';
 
 import RequireAuth from 'common/components/RequireAuth';
 import RequireGuest from 'common/components/RequireGuest';
@@ -16,7 +17,7 @@ const allRoutes = [
 		children: [
 			{
 				element: <RequireAuth />,
-				children: [...homeRoutes, ...usersRoutes]
+				children: [...homeRoutes, ...usersRoutes, ...accountRoutes]
 			},
 			{
 				element: <RequireGuest />,
