@@ -45,8 +45,6 @@ const user = {
 
 				const newInfo = await UserService.updateUser(formData);
 
-				console.log(newInfo);
-
 				user.setInfo(newInfo);
 			} catch (e) {
 				console.log(e);

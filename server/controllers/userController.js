@@ -1,5 +1,4 @@
 const userService = require('../services/userService');
-const path = require('path');
 
 class UserController {
 	async getUsers(req, res, next) {

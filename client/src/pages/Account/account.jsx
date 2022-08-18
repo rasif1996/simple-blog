@@ -17,8 +17,6 @@ function Account() {
 
 	const [avatarSrc, setAvatarSrc] = useState(info.image || '/images/avatar.png');
 
-	console.log(info);
-
 	const {handleSubmit, register} = useHookForm({defaultValues: info});
 
 	const handleChange = e => {
