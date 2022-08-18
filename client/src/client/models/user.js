@@ -31,9 +31,21 @@ const user = {
 				user.setUsers([]);
 			}
 		},
-		async updateUser(info, store) {
+		async updateUser(info) {
 			try {
-				const newInfo = await UserService.updateUser(store.user.id, info);
+				const {image, ...rest} = info;
+
+				const formData = new FormData();
+
+				if (image.length) {
+					formData.append('image', image[0]);
+				}
+
+				formData.append('info', JSON.stringify(rest));
+
+				const newInfo = await UserService.updateUser(formData);
+
+				console.log(newInfo);
 
 				user.setInfo(newInfo);
 			} catch (e) {

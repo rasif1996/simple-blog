@@ -7,8 +7,8 @@ class UserService {
 		return data;
 	}
 
-	async updateUser(userId, info) {
-		const {data} = await api.users.updateUser(userId, info);
+	async updateUser(info) {
+		const {data} = await api.users.updateUser(info);
 
 		return data;
 	}

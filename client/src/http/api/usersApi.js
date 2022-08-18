@@ -4,8 +4,8 @@ const api = {
 	async getUsers() {
 		return await privateAxios.get('/api/users');
 	},
-	async updateUser(id, data) {
-		return await privateAxios.patch(`/api/users/${id}`, data);
+	async updateUser(data) {
+		return await privateAxios.patch(`/api/users`, data);
 	}
 };
 
