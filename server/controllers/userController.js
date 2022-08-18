@@ -1,4 +1,5 @@
 const userService = require('../services/userService');
+const path = require('path');
 
 class UserController {
 	async getUsers(req, res, next) {
@@ -13,8 +14,18 @@ class UserController {
 
 	async updateUser(req, res, next) {
 		try {
-			const {id} = req.params;
-			const data = req.body;
+			let data = req.body.info ? JSON.parse(req.body.info) : {};
+			const image = req.files?.image;
+
+			if (image) {
+				const imagePath = `/images/${image.name}`;
+
+				image.mv('public' + imagePath);
+
+				data = {...data, image: `${process.env.SERVER_URL}:${process.env.PORT}${imagePath}`};
+			}
+
+			const {id} = res.user;
 
 			const info = await userService.updateUser(id, data);
 
