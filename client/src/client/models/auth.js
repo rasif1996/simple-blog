@@ -1,6 +1,7 @@
 import AuthService from 'services/AuthService';
 import SubmissionError from 'common/exceptions/SubmissionError';
 import history from 'common/history';
+import {removeToken} from 'common/utils';
 
 const initialState = false;
 
@@ -36,9 +37,15 @@ const auth = {
 			dispatch({type: 'user/logout'});
 		},
 		async refresh() {
-			const data = await AuthService.refresh();
+			try {
+				const data = await AuthService.refresh();
 
-			dispatch.user.login(data.user);
+				dispatch.user.login(data.user);
+			} catch (e) {
+				console.log(e);
+
+				removeToken();
+			}
 		}
 	}),
 	selectors: slice => ({

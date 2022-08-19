@@ -5,7 +5,6 @@ const errorMiddleware = require('../middlewares/errorMiddleware');
 const cookie = require('cookie-parser');
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
-const path = require('path');
 
 const configure = app => {
 	app.use(fileUpload());
