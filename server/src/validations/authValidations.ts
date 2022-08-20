@@ -1,7 +1,7 @@
-const {check} = require('express-validator');
-const UserModel = require('../models/UserModel');
+import {check} from 'express-validator';
+import UserModel from '@/models/UserModel';
 
-exports.registrationValidation = [
+export const registrationValidation = [
 	check('email')
 		.exists()
 		.withMessage('Поле email обязательно')
@@ -31,7 +31,7 @@ exports.registrationValidation = [
 		})
 ];
 
-exports.loginValidation = [
+export const loginValidation = [
 	check('email').exists().withMessage('Поле email обязательно').isEmail().withMessage('Невалидная почта'),
 	check('password')
 		.exists()

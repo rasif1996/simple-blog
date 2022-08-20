@@ -1,37 +1,34 @@
 import UserModel from '@/models/UserModel';
 import ApiError from '@/exceptions/ApiError';
 import bcryptService from './bcryptService';
-import {v4} from 'uuid';
 import UserDto from '@/dtos/userDto';
 import tokenService from './tokenService';
 import AccountDto from '@/dtos/accountDto';
 import {DeleteResult} from 'mongodb';
-import IUser from '@/types/IUser';
 
 class AuthService {
 	async registration(email: string, password: string): Promise<UserDto> {
-		const hashPassword = bcryptService.encrypt(password);
-		const activationLink = v4();
-
-		const user = await UserModel.create({email, password: hashPassword, activationLink});
+		const user = await UserModel.create({email, password});
 		const userDto = new UserDto(user);
 
 		return userDto;
 	}
 
 	async login(email: string, password: string) {
-		const user = await UserModel.findOne({email});
+		const foundUser = await UserModel.findOne({email});
 
-		if (!user) {
+		if (!foundUser) {
 			throw ApiError.BadRequest('Данный email не существует', [{param: 'email', msg: 'Почта существует'}]);
 		}
 
-		if (!bcryptService.compare(password, user.password)) {
+		const isMatch = bcryptService.compare(password, foundUser.password);
+
+		if (!isMatch) {
 			throw ApiError.BadRequest('Неверный пароль', [{param: 'password', msg: 'Неверный пароль'}]);
 		}
 
-		const userDto = new UserDto(user);
-		const accountDto = new AccountDto(user);
+		const userDto = new UserDto(foundUser);
+		const accountDto = new AccountDto(foundUser);
 
 		const tokens = tokenService.generateTokens({...userDto});
 
