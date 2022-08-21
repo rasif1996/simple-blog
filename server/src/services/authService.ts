@@ -4,17 +4,19 @@ import bcryptService from './bcryptService';
 import UserDto from '@/dtos/userDto';
 import tokenService from './tokenService';
 import AccountDto from '@/dtos/accountDto';
-import {DeleteResult} from 'mongodb';
+import RegistrationDto from '@/dtos/registrationDto';
+import {LoginResponseType} from '@/types';
 
 class AuthService {
-	async registration(email: string, password: string): Promise<UserDto> {
+	async registration(email: string, password: string): Promise<RegistrationDto> {
 		const user = await UserModel.create({email, password});
-		const userDto = new UserDto(user);
+
+		const userDto = new RegistrationDto(user);
 
 		return userDto;
 	}
 
-	async login(email: string, password: string) {
+	async login(email: string, password: string): Promise<LoginResponseType> {
 		const foundUser = await UserModel.findOne({email});
 
 		if (!foundUser) {
@@ -27,15 +29,16 @@ class AuthService {
 			throw ApiError.BadRequest('Неверный пароль', [{param: 'password', msg: 'Неверный пароль'}]);
 		}
 
-		const userDto = new UserDto(foundUser);
+		const registrationDto = new RegistrationDto(foundUser);
 		const accountDto = new AccountDto(foundUser);
+		const userDto = new UserDto(foundUser);
 
-		const tokens = tokenService.generateTokens({...userDto});
+		const tokens = tokenService.generateTokens({...registrationDto});
 
 		await tokenService.saveToken(userDto.id, tokens.refreshToken);
 
 		return {
-			...tokens,
+			tokens,
 			user: {
 				...userDto,
 				info: accountDto
@@ -43,17 +46,15 @@ class AuthService {
 		};
 	}
 
-	async logout(refreshToken: string): Promise<DeleteResult> {
+	async logout(refreshToken: string): Promise<void> {
 		if (!refreshToken) {
 			throw ApiError.Unathorized();
 		}
 
-		const token = await tokenService.removeToken(refreshToken);
-
-		return token;
+		await tokenService.removeToken(refreshToken);
 	}
 
-	async refresh(refreshToken: string) {
+	async refresh(refreshToken: string): Promise<LoginResponseType> {
 		if (!refreshToken) {
 			throw ApiError.Unathorized();
 		}
@@ -66,14 +67,16 @@ class AuthService {
 		}
 
 		const user = await UserModel.findOne({email: token.email});
+
 		const userDto = new UserDto(user);
 		const accountDto = new AccountDto(user);
 
 		const tokens = tokenService.generateTokens({...userDto});
+
 		await tokenService.saveToken(userDto.id, tokens.refreshToken);
 
 		return {
-			...tokens,
+			tokens,
 			user: {
 				...userDto,
 				info: accountDto

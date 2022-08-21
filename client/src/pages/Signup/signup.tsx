@@ -1,6 +1,7 @@
 import useForm from '../../hooks/useHookForm';
 import {useDispatch} from 'react-redux';
 import Input from '../../common/ui/Input/input';
+import {IRegistrationData} from '../../types';
 
 import styles from './signup.module.scss';
 
@@ -13,14 +14,14 @@ function Signup() {
 		register,
 		handleSubmit,
 		formState: {errors, isSubmitting}
-	} = useForm({validate: 'registration'});
+	} = useForm<IRegistrationData>({validate: 'registration'});
 
 	return (
 		<form className={styles.form} onSubmit={handleSubmit(registration)}>
 			<Input label='Почта:' name='email' register={register} errors={errors} />
 			<Input label='Пароль:' name='password' register={register} errors={errors} />
 			<Input label='Пароль:' name='passwordConfirmation' register={register} errors={errors} />
-			{/* {errors && errors.submission && <p>{errors.submission.message}</p>} */}
+			{errors && errors.submission && <p>{errors.submission.message}</p>}
 			<button type='submit' disabled={isSubmitting}>
 				Sign Up
 			</button>

@@ -1,9 +1,9 @@
 import {Request, Response, NextFunction} from 'express';
-import {validationResult} from 'express-validator';
+import {ValidationChain, validationResult} from 'express-validator';
 import ApiError from '@/exceptions/ApiError';
 
 const middleware =
-	(validations = []) =>
+	(validations: ValidationChain[] = []) =>
 	async (req: Request, res: Response, next: NextFunction) => {
 		await Promise.all(validations.map(validation => validation.run(req)));
 

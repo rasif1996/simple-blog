@@ -9,10 +9,7 @@ class AuthController {
 
 			const userData = await authService.registration(email, password);
 
-			return res.json({
-				message: 'Registered successfully',
-				user: userData
-			});
+			res.json(userData);
 		} catch (e) {
 			next(e);
 		}
@@ -24,12 +21,9 @@ class AuthController {
 
 			const userData = await authService.login(email, password);
 
-			res.cookie('refreshToken', userData.refreshToken, {maxAge: THIRTY_DAYS, httpOnly: true});
+			res.cookie('refreshToken', userData.tokens.refreshToken, {maxAge: THIRTY_DAYS, httpOnly: true});
 
-			return res.json({
-				message: 'Logged in successfully',
-				...userData
-			});
+			res.json(userData);
 		} catch (e) {
 			next(e);
 		}
@@ -43,7 +37,7 @@ class AuthController {
 
 			res.clearCookie('refreshToken');
 
-			return res.json({message: 'Logouted'});
+			res.json({status: 200});
 		} catch (e) {
 			next(e);
 		}
@@ -55,12 +49,9 @@ class AuthController {
 
 			const userData = await authService.refresh(refreshToken);
 
-			res.cookie('refreshToken', userData.refreshToken, {maxAge: THIRTY_DAYS, httpOnly: true});
+			res.cookie('refreshToken', userData.tokens.refreshToken, {maxAge: THIRTY_DAYS, httpOnly: true});
 
-			return res.json({
-				message: 'Refreshed successfully',
-				...userData
-			});
+			res.json(userData);
 		} catch (e) {
 			next(e);
 		}

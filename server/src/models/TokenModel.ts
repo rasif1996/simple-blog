@@ -4,7 +4,8 @@ import IToken from '@/types/IToken';
 const schema = new Schema<IToken>({
 	user: {
 		type: Schema.Types.ObjectId,
-		required: true
+		required: true,
+		ref: 'User'
 	},
 	refreshToken: {
 		type: String,

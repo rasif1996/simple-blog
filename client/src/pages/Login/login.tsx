@@ -1,6 +1,7 @@
 import Input from '../../common/ui/Input/input';
 import useForm from '../../hooks/useHookForm';
 import {useDispatch} from 'react-redux';
+import {ILoginData} from '../../types';
 
 import styles from './login.module.scss';
 
@@ -13,13 +14,13 @@ function Login() {
 		register,
 		handleSubmit,
 		formState: {errors}
-	} = useForm({validate: 'login'});
+	} = useForm<ILoginData>({validate: 'login'});
 
 	return (
 		<form className={styles.form} onSubmit={handleSubmit(login)}>
 			<Input label='Почта: ' name='email' register={register} errors={errors} />
 			<Input label='Пароль: ' name='password' register={register} errors={errors} />
-			{/* {errors && errors.submission && <p>{errors.submission.message}</p>} */}
+			{errors && errors.submission && <p>{errors.submission.message}</p>}
 			<button type='submit'>Log In</button>
 		</form>
 	);

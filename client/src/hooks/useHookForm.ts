@@ -3,10 +3,10 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import withFormErrorHandler from '../hocs/withFormErrorHandler';
 import * as validations from '../common/validates';
 
-function useHookForm({validate, ...settings}: any = {}) {
+function useHookForm<T>({validate, ...settings}: any = {}) {
 	const schema = validations[validate];
 
-	const form = useForm({
+	const form = useForm<T>({
 		resolver: schema ? yupResolver(schema) : undefined,
 		mode: 'onChange',
 		...settings
