@@ -21,9 +21,10 @@ class App {
 
 	public listen() {
 		const PORT = process.env.PORT || 5000;
+		const serverInfo = `Server is running on port: ${PORT}`;
 
 		this.app.listen(PORT, () => {
-			console.log(`App listening on the port ${PORT}`);
+			console.log(serverInfo);
 		});
 	}
 
