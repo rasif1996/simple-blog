@@ -2,11 +2,11 @@
 	"name": "server",
 	"version": "1.0.0",
 	"description": "",
-	"main": "dist/index.ts",
+	"main": "dist/server.ts",
 	"scripts": {
 		"build": "npx tsc",
-		"start": "node dist/index.ts",
-		"dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\""
+		"start": "node dist/server.ts",
+		"dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/server.js\""
 	},
 	"keywords": [],
 	"author": "",
@@ -17,6 +17,7 @@
 		"cookie-parser": "^1.4.6",
 		"cors": "^2.8.5",
 		"dotenv": "^16.0.1",
+		"envalid": "^7.3.1",
 		"express": "^4.18.1",
 		"express-fileupload": "^1.4.0",
 		"express-validator": "^6.14.2",

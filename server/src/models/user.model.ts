@@ -1,5 +1,5 @@
-import {Schema, model} from 'mongoose';
-import bcryptService from '@/services/bcryptService';
+import {Schema, model, Document} from 'mongoose';
+import bcryptService from '@/services/bcrypt.service';
 import IUser from '@/types/IUser';
 import {v4} from 'uuid';
 import {NextFunction} from 'express';
@@ -54,6 +54,6 @@ schema.pre('save', async function (next: NextFunction) {
 	next();
 });
 
-const userModel = model<IUser>('User', schema);
+const userModel = model<IUser & Document>('User', schema);
 
 export default userModel;

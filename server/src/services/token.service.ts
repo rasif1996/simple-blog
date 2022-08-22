@@ -1,7 +1,7 @@
 import jwt, {JwtPayload} from 'jsonwebtoken';
-import TokenModel from '@/models/TokenModel';
+import TokenModel from '@/models/token.model';
 import {DeleteResult} from 'mongodb';
-import UserDto from '@/dtos/userDto';
+import UserDto from '@/dtos/user.dto';
 import {TokensType} from '@/types';
 import IToken from '@/types/IToken';
 import ITokenService from '@/types/ITokenService';

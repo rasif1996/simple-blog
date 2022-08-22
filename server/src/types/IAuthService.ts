@@ -1,4 +1,4 @@
-import UserDto from '@/dtos/userDto';
+import UserDto from '@/dtos/user.dto';
 import {DeleteResult} from 'mongodb';
 
 interface IAuthService {

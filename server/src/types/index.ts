@@ -1,5 +1,5 @@
-import AccountDto from '@/dtos/accountDto';
-import UserDto from '@/dtos/userDto';
+import AccountDto from '@/dtos/account.dto';
+import UserDto from '@/dtos/user.dto';
 
 export type StartAppType = () => void;
 

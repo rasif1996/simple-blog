@@ -1,6 +1,6 @@
 import {Request, Response, NextFunction} from 'express';
 import ApiError from '@/exceptions/ApiError';
-import tokenService from '@/services/tokenService';
+import tokenService from '@/services/token.service';
 
 const middleware = (req: Request, res: Response, next: NextFunction) => {
 	try {

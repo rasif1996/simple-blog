@@ -1,4 +1,4 @@
-import UserDto from '@/dtos/userDto';
+import UserDto from '@/dtos/user.dto';
 import {TokensType} from '@/types';
 import {JwtPayload} from 'jsonwebtoken';
 import {DeleteResult} from 'mongodb';

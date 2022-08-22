@@ -1,4 +1,4 @@
-import AccountDto from '@/dtos/accountDto';
+import AccountDto from '@/dtos/account.dto';
 import IUser from './IUser';
 
 interface IUserService {

@@ -1,6 +1,6 @@
-import UserModel from '@/models/UserModel';
+import UserModel from '@/models/user.model';
 import ApiError from '@/exceptions/ApiError';
-import AccountDto from '@/dtos/accountDto';
+import AccountDto from '@/dtos/account.dto';
 import IUser from '@/types/IUser';
 import IUserService from '@/types/IUserService';
 

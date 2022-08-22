@@ -1,4 +1,4 @@
-import {Schema, model} from 'mongoose';
+import {Schema, model, Document} from 'mongoose';
 import IToken from '@/types/IToken';
 
 const schema = new Schema<IToken>({
@@ -13,6 +13,6 @@ const schema = new Schema<IToken>({
 	}
 });
 
-const tokenModel = model<IToken>('Token', schema);
+const tokenModel = model<IToken & Document>('Token', schema);
 
 export default tokenModel;

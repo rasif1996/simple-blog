@@ -1,10 +1,9 @@
-import UserModel from '@/models/UserModel';
+import UserModel from '@/models/user.model';
 import ApiError from '@/exceptions/ApiError';
-import bcryptService from './bcryptService';
-import UserDto from '@/dtos/userDto';
-import tokenService from './tokenService';
-import AccountDto from '@/dtos/accountDto';
-import RegistrationDto from '@/dtos/registrationDto';
+import UserDto from '@/dtos/user.dto';
+import tokenService from './token.service';
+import AccountDto from '@/dtos/account.dto';
+import RegistrationDto from '@/dtos/registration.dto';
 import {LoginResponseType} from '@/types';
 
 class AuthService {
@@ -16,18 +15,8 @@ class AuthService {
 		return userDto;
 	}
 
-	async login(email: string, password: string): Promise<LoginResponseType> {
+	async login(email: string): Promise<LoginResponseType> {
 		const foundUser = await UserModel.findOne({email});
-
-		if (!foundUser) {
-			throw ApiError.BadRequest('Данный email не существует', [{param: 'email', msg: 'Почта существует'}]);
-		}
-
-		const isMatch = bcryptService.compare(password, foundUser.password);
-
-		if (!isMatch) {
-			throw ApiError.BadRequest('Неверный пароль', [{param: 'password', msg: 'Неверный пароль'}]);
-		}
 
 		const registrationDto = new RegistrationDto(foundUser);
 		const accountDto = new AccountDto(foundUser);

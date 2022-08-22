@@ -1,5 +1,5 @@
 import {Request, Response, NextFunction} from 'express';
-import authService from '@/services/authService';
+import authService from '@/services/auth.service';
 import {THIRTY_DAYS} from '@/constants';
 
 class AuthController {
@@ -17,9 +17,9 @@ class AuthController {
 
 	async login(req: Request, res: Response, next: NextFunction) {
 		try {
-			const {email, password} = req.body;
+			const {email} = req.body;
 
-			const userData = await authService.login(email, password);
+			const userData = await authService.login(email);
 
 			res.cookie('refreshToken', userData.tokens.refreshToken, {maxAge: THIRTY_DAYS, httpOnly: true});
 
