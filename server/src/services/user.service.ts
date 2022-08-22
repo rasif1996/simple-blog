@@ -1,11 +1,11 @@
 import UserModel from '@/models/user.model';
 import ApiError from '@/exceptions/ApiError';
 import AccountDto from '@/dtos/account.dto';
-import IUser from '@/types/IUser';
-import IUserService from '@/types/IUserService';
+import {IUserModel} from '@/types/models.types';
+import {IUserService} from '@/types/services.types';
 
 class UserService implements IUserService {
-	async getUsers(): Promise<IUser[]> {
+	async getUsers(): Promise<IUserModel[]> {
 		const users = await UserModel.find({});
 
 		return users;

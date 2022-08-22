@@ -1,4 +1,4 @@
-import IUser from '@/types/IUser';
+import {IUserModel} from '@/types/models.types';
 
 class AccountDto {
 	readonly name: string;
@@ -6,7 +6,7 @@ class AccountDto {
 	readonly age: number;
 	readonly image: string;
 
-	constructor(model: IUser) {
+	constructor(model: IUserModel) {
 		this.name = model.name;
 		this.surname = model.surname;
 		this.age = model.age;

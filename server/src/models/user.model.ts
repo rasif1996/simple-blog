@@ -1,10 +1,10 @@
 import {Schema, model, Document} from 'mongoose';
 import bcryptService from '@/services/bcrypt.service';
-import IUser from '@/types/IUser';
+import {IUserModel} from '@/types/models.types';
 import {v4} from 'uuid';
 import {NextFunction} from 'express';
 
-const schema = new Schema<IUser>({
+const schema = new Schema({
 	email: {
 		type: String,
 		required: true,
@@ -54,6 +54,6 @@ schema.pre('save', async function (next: NextFunction) {
 	next();
 });
 
-const userModel = model<IUser & Document>('User', schema);
+const userModel = model<IUserModel & Document>('User', schema);
 
 export default userModel;

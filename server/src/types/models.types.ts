@@ -1,6 +1,6 @@
 import {Types} from 'mongoose';
 
-interface IUser {
+export interface IUserModel {
 	_id: Types.ObjectId;
 	email: string;
 	password: string;
@@ -12,4 +12,7 @@ interface IUser {
 	image?: string;
 }
 
-export default IUser;
+export interface ITokenModel {
+	user: Types.ObjectId;
+	refreshToken: string;
+}

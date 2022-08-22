@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import IBcryptService from '@/types/IBcryptService';
+import {IBcryptService} from '@/types/services.types';
 
 const saltRounds = 3;
 

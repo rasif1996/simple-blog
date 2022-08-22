@@ -1,8 +1,8 @@
 import nodemailer, {Transporter} from 'nodemailer';
-import IMailService from '@/types/IMailService';
+import {IMailService} from '@/types/services.types';
 
 class MailService implements IMailService {
-	transporter: Transporter;
+	private transporter: Transporter;
 
 	constructor() {
 		this.transporter = nodemailer.createTransport({

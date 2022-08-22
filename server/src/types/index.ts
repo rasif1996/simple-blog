@@ -1,8 +1,6 @@
 import AccountDto from '@/dtos/account.dto';
 import UserDto from '@/dtos/user.dto';
 
-export type StartAppType = () => void;
-
 export type TokensType = {
 	accessToken: string;
 	refreshToken: string;

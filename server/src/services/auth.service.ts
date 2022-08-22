@@ -5,8 +5,9 @@ import tokenService from './token.service';
 import AccountDto from '@/dtos/account.dto';
 import RegistrationDto from '@/dtos/registration.dto';
 import {LoginResponseType} from '@/types';
+import {IAuthService} from '@/types/services.types';
 
-class AuthService {
+class AuthService implements IAuthService {
 	async registration(email: string, password: string): Promise<RegistrationDto> {
 		const user = await UserModel.create({email, password});
 

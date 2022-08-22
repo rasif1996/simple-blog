@@ -3,8 +3,8 @@ import TokenModel from '@/models/token.model';
 import {DeleteResult} from 'mongodb';
 import UserDto from '@/dtos/user.dto';
 import {TokensType} from '@/types';
-import IToken from '@/types/IToken';
-import ITokenService from '@/types/ITokenService';
+import {ITokenModel} from '@/types/models.types';
+import {ITokenService} from '@/types/services.types';
 import {Types} from 'mongoose';
 
 class TokenService implements ITokenService {
@@ -18,7 +18,7 @@ class TokenService implements ITokenService {
 		};
 	}
 
-	async saveToken(userId: Types.ObjectId, refreshToken: string): Promise<IToken> {
+	async saveToken(userId: Types.ObjectId, refreshToken: string): Promise<ITokenModel> {
 		const token = await TokenModel.findOne({user: userId});
 
 		if (token) {
@@ -46,7 +46,7 @@ class TokenService implements ITokenService {
 		}
 	}
 
-	async findToken(refreshToken: string): Promise<IToken> {
+	async findToken(refreshToken: string): Promise<ITokenModel> {
 		return await TokenModel.findOne({refreshToken});
 	}
 
