@@ -6,6 +6,7 @@ import fileUpload from 'express-fileupload';
 import errorMiddleware from '@/middlewares/error.middleware';
 import router from '@/v1/routers';
 import mongoose from 'mongoose';
+import path from 'path';
 
 class App {
 	private app: Application;
