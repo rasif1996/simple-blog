@@ -1,5 +1,4 @@
-import IInfo from '../../types/IInfo';
-import IUser from '../../types/IUser';
+import {IUser, IInfo} from '../../types/models';
 import {privateAxios} from '../axios';
 import {responseBody} from '../helpers';
 

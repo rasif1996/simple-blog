@@ -10,9 +10,18 @@ export interface IUserModel {
 	surname?: string;
 	age?: number;
 	image?: string;
+	posts: IPostModel[];
 }
 
 export interface ITokenModel {
 	user: Types.ObjectId;
 	refreshToken: string;
+}
+
+export interface IPostModel {
+	_id: Types.ObjectId;
+	title: string;
+	text: string;
+	slug: string;
+	userId: Types.ObjectId;
 }

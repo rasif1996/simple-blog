@@ -1,7 +1,7 @@
 import Input from '../../common/ui/Input/input';
 import useForm from '../../hooks/useHookForm';
 import {useDispatch} from 'react-redux';
-import {ILoginData} from '../../types';
+import {LoginFormType} from '../../types/forms';
 
 import styles from './login.module.scss';
 
@@ -14,7 +14,7 @@ function Login() {
 		register,
 		handleSubmit,
 		formState: {errors}
-	} = useForm<ILoginData>({validate: 'login'});
+	} = useForm<LoginFormType>({validate: 'login'});
 
 	return (
 		<form className={styles.form} onSubmit={handleSubmit(login)}>

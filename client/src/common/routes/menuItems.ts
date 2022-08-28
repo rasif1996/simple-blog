@@ -1,9 +1,14 @@
-import IMenuItem from '../../types/IMenuItem';
+import {IMenuItem} from '../../types';
 
 const menuItems: IMenuItem[] = [
 	{
 		label: 'Home',
 		to: '/'
+	},
+	{
+		label: 'Posts',
+		to: '/posts',
+		authRequired: true
 	},
 	{
 		label: 'Account',

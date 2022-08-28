@@ -1,7 +1,7 @@
 import useForm from '../../hooks/useHookForm';
 import {useDispatch} from 'react-redux';
 import Input from '../../common/ui/Input/input';
-import {IRegistrationData} from '../../types';
+import {RegistrationFormType} from '../../types/forms';
 
 import styles from './signup.module.scss';
 
@@ -14,7 +14,7 @@ function Signup() {
 		register,
 		handleSubmit,
 		formState: {errors, isSubmitting}
-	} = useForm<IRegistrationData>({validate: 'registration'});
+	} = useForm<RegistrationFormType>({validate: 'registration'});
 
 	return (
 		<form className={styles.form} onSubmit={handleSubmit(registration)}>

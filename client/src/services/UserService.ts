@@ -1,7 +1,6 @@
 import api from '../http';
-import IInfo from '../types/IInfo';
-import IUser from '../types/IUser';
-import IUserService from '../types/IUserService';
+import {IUser, IInfo} from '../types/models';
+import {IUserService} from '../types/services';
 
 class UserService implements IUserService {
 	async getUsers(): Promise<IUser[]> {

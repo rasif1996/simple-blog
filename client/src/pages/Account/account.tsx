@@ -5,7 +5,7 @@ import {useState} from 'react';
 import useAppStore from '../../hooks/useAppStore';
 import useAppSelector from '../../hooks/useAppSelector';
 import useAppDispatch from '../../hooks/useAppDispatch';
-import {IAccountData} from '../../types';
+import {AccountFormType} from '../../types/forms';
 
 function Account() {
 	const {
@@ -20,7 +20,7 @@ function Account() {
 
 	const [avatarSrc, setAvatarSrc] = useState(info.image || '/images/avatar.png');
 
-	const {handleSubmit, register} = useHookForm<IAccountData>({defaultValues: info});
+	const {handleSubmit, register} = useHookForm<AccountFormType>({defaultValues: info});
 
 	const handleChange = e => {
 		const files = e.currentTarget.files;

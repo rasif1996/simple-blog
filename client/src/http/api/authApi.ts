@@ -1,19 +1,20 @@
-import {ILoginData, IRegistrationData, IRegistrationResponse, ILoginResponse, IStatusResponse} from '../../types';
 import {privateAxios, publicAxios} from '../axios';
 import {responseBody} from '../helpers';
+import {LoginFormType, RegistrationFormType} from '../../types/forms';
+import {RegistrationResponseType, LoginResponseType, StatusResponseType} from '../../types/responses';
 
 const api = {
-	registration(data: IRegistrationData): Promise<IRegistrationResponse> {
-		return publicAxios.post<IRegistrationResponse>('/api/auth/registration', data).then(responseBody);
+	registration(data: RegistrationFormType): Promise<RegistrationResponseType> {
+		return publicAxios.post<RegistrationResponseType>('/api/auth/registration', data).then(responseBody);
 	},
-	login(data: ILoginData): Promise<ILoginResponse> {
-		return publicAxios.post<ILoginResponse>('/api/auth/login', data).then(responseBody);
+	login(data: LoginFormType): Promise<LoginResponseType> {
+		return publicAxios.post<LoginResponseType>('/api/auth/login', data).then(responseBody);
 	},
-	logout(): Promise<IStatusResponse> {
-		return privateAxios.post<IStatusResponse>('/api/auth/logout').then(responseBody);
+	logout(): Promise<StatusResponseType> {
+		return privateAxios.post<StatusResponseType>('/api/auth/logout').then(responseBody);
 	},
-	refresh(): Promise<ILoginResponse> {
-		return publicAxios.get<ILoginResponse>('/api/auth/refresh').then(responseBody);
+	refresh(): Promise<LoginResponseType> {
+		return publicAxios.get<LoginResponseType>('/api/auth/refresh').then(responseBody);
 	}
 };
 

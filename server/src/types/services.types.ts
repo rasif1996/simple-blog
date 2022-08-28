@@ -5,6 +5,7 @@ import {JwtPayload} from 'jsonwebtoken';
 import {Types} from 'mongoose';
 import AccountDto from '@/dtos/account.dto';
 import {IUserModel, ITokenModel} from '@/types/models.types';
+import PostDto from '@/dtos/post.dto';
 
 export interface IAuthService {
 	registration(email: string, password: string): Promise<UserDto>;
@@ -35,4 +36,8 @@ export interface ITokenService {
 export interface IUserService {
 	getUsers(): Promise<IUserModel[]>;
 	updateUser(id: string, data: any): Promise<AccountDto>;
+}
+
+export interface IPostsService {
+	createPost(userId: string, title: string, text: string): Promise<PostDto>;
 }

@@ -1,14 +1,15 @@
 import {removeToken, setToken} from '../common/utils';
-import IAuthService from '../types/IAuthService';
+import {IAuthService} from '../types/services';
 import api from '../http';
-import {ILoginData, ILoginResponse, IRegistrationData} from '../types';
+import {LoginFormType, RegistrationFormType} from '../types/forms';
+import {LoginResponseType} from '../types/responses';
 
 class AuthService implements IAuthService {
-	async registration(credentials: IRegistrationData): Promise<void> {
+	async registration(credentials: RegistrationFormType): Promise<void> {
 		await api.auth.registration(credentials);
 	}
 
-	async login(credentials: ILoginData): Promise<ILoginResponse> {
+	async login(credentials: LoginFormType): Promise<LoginResponseType> {
 		const data = await api.auth.login(credentials);
 
 		setToken(data.tokens.accessToken);
@@ -22,7 +23,7 @@ class AuthService implements IAuthService {
 		await api.auth.logout();
 	}
 
-	async refresh(): Promise<ILoginResponse> {
+	async refresh(): Promise<LoginResponseType> {
 		const data = await api.auth.refresh();
 
 		setToken(data.tokens.accessToken);

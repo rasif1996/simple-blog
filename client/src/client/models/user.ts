@@ -1,15 +1,14 @@
 import type {RootModel} from '.';
 import {createModel} from '@rematch/core';
 import UserService from '../../services/UserService';
-import IInfo from '../../types/IInfo';
-import IUser from '../../types/IUser';
+import {IUser, IInfo} from '../../types/models';
 
-interface UserStateType {
+type UserStateType = {
 	email: string;
 	id: string;
 	info: IInfo;
 	users: IUser[];
-}
+};
 
 const initialState: UserStateType = {
 	email: '',

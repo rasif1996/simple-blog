@@ -6,7 +6,7 @@ import fileUpload from 'express-fileupload';
 import errorMiddleware from '@/middlewares/error.middleware';
 import router from '@/v1/routers';
 import mongoose from 'mongoose';
-import path from 'path';
+import slug from 'mongoose-slug-generator';
 
 class App {
 	private app: Application;
@@ -57,6 +57,8 @@ class App {
 
 	private connectToTheDatabase() {
 		const {DB_URL, DB_NAME} = process.env;
+
+		mongoose.plugin(slug);
 
 		mongoose.connect(`${DB_URL}/${DB_NAME}`);
 	}

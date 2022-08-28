@@ -6,17 +6,17 @@ import * as validations from '../common/validates';
 function useHookForm<T>({validate, ...settings}: any = {}) {
 	const schema = validations[validate];
 
-	const form = useForm<T>({
+	const methods = useForm<T>({
 		resolver: schema ? yupResolver(schema) : undefined,
 		mode: 'onChange',
 		...settings
 	});
 
 	const handleSubmit = onSubmit => {
-		return form.handleSubmit(withFormErrorHandler(onSubmit, form.setError, form.clearErrors));
+		return methods.handleSubmit(withFormErrorHandler(onSubmit, methods.setError, methods.clearErrors));
 	};
 
-	return {...form, handleSubmit};
+	return {...methods, handleSubmit};
 }
 
 export default useHookForm;

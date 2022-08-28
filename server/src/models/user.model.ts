@@ -33,7 +33,13 @@ const schema = new Schema({
 	},
 	image: {
 		type: String
-	}
+	},
+	posts: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'Post'
+		}
+	]
 });
 
 schema.pre('validate', async function (next: NextFunction) {
@@ -54,6 +60,6 @@ schema.pre('save', async function (next: NextFunction) {
 	next();
 });
 
-const userModel = model<IUserModel & Document>('User', schema);
+const UserModel = model<IUserModel & Document>('User', schema);
 
-export default userModel;
+export default UserModel;

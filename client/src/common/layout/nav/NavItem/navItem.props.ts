@@ -1,4 +1,4 @@
-import IMenuItem from '../../../../types/IMenuItem';
+import {IMenuItem} from '../../../../types';
 
 export interface Props {
 	item: IMenuItem;
