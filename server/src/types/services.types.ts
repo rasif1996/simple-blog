@@ -4,7 +4,7 @@ import {TokensType, LoginResponseType} from '@/types';
 import {JwtPayload} from 'jsonwebtoken';
 import {Types} from 'mongoose';
 import AccountDto from '@/dtos/account.dto';
-import {IUserModel, ITokenModel} from '@/types/models.types';
+import {IUserModel, ITokenModel, IPostModel} from '@/types/models.types';
 import PostDto from '@/dtos/post.dto';
 
 export interface IAuthService {
@@ -39,5 +39,6 @@ export interface IUserService {
 }
 
 export interface IPostsService {
+	getPosts(): Promise<PostDto[]>;
 	createPost(userId: string, title: string, text: string): Promise<PostDto>;
 }

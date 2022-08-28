@@ -1,10 +1,13 @@
+import {Props} from './postsItem.props';
+
 import s from './postsItem.module.scss';
 
-function PostsItem(): JSX.Element {
+function PostsItem({title, text}: Props): JSX.Element {
 	return (
-		<>
-			<p>Posts Item</p>
-		</>
+		<div>
+			<p>{title}</p>
+			<p>{text}</p>
+		</div>
 	);
 }
 

@@ -16,12 +16,26 @@ const initialState: PostsStateType = {
 const posts = createModel<RootModel>()({
 	name: 'posts',
 	state: initialState,
-	reducers: {},
+	reducers: {
+		setPosts(state, data: IPost[]) {
+			state.posts = data;
+		}
+	},
 	effects: dispatch => ({
+		async fetchPosts() {
+			const posts = await PostsService.getPosts();
+
+			dispatch.posts.setPosts(posts);
+		},
 		async createPost(data: CreatePostFormType) {
 			await PostsService.createPost(data);
 
 			history.push('/posts');
+		}
+	}),
+	selectors: slice => ({
+		getPosts() {
+			return slice(state => state.posts);
 		}
 	})
 });

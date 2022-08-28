@@ -2,6 +2,16 @@ import postsService from '@/services/posts.service';
 import {Response, Request, NextFunction} from 'express';
 
 class PostsController {
+	async getPosts(req: Request, res: Response, next: NextFunction) {
+		try {
+			const posts = await postsService.getPosts();
+
+			res.json(posts);
+		} catch (e) {
+			next(e);
+		}
+	}
+
 	async createPost(req: Request, res: Response, next: NextFunction) {
 		try {
 			const {title, text} = req.body;

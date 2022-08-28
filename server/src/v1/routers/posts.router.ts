@@ -7,6 +7,7 @@ import {createPostValidation} from '@/validations/posts.validator';
 
 const router = express.Router();
 
+router.get('/', authMiddleware, postsController.getPosts);
 router.post('/create', authMiddleware, validate(createPostValidation), postsController.createPost);
 
 export default router;

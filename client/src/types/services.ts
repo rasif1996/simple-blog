@@ -1,5 +1,5 @@
 import {CreatePostFormType} from './forms';
-import {IUser, IInfo} from './models';
+import {IUser, IInfo, IPost} from './models';
 
 export interface IAuthService {
 	logout(): void;
@@ -11,5 +11,6 @@ export interface IUserService {
 }
 
 export interface IPostsService {
+	getPosts(): Promise<IPost[]>;
 	createPost(data: CreatePostFormType): void;
 }
