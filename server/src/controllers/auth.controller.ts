@@ -3,7 +3,7 @@ import authService from '@/services/auth.service';
 import {THIRTY_DAYS} from '@/constants';
 
 class AuthController {
-	async registration(req: Request, res: Response, next: NextFunction) {
+	async registration(req: Request, res: Response) {
 		const {email, password} = req.body;
 
 		const userData = await authService.registration(email, password);
@@ -11,7 +11,7 @@ class AuthController {
 		res.json(userData);
 	}
 
-	async login(req: Request, res: Response, next: NextFunction) {
+	async login(req: Request, res: Response) {
 		const {email} = req.body;
 
 		const userData = await authService.login(email);
@@ -21,7 +21,7 @@ class AuthController {
 		res.json(userData);
 	}
 
-	async logout(req: Request, res: Response, next: NextFunction) {
+	async logout(req: Request, res: Response) {
 		const {refreshToken} = req.cookies;
 
 		await authService.logout(refreshToken);
@@ -31,7 +31,7 @@ class AuthController {
 		res.json({status: 200});
 	}
 
-	async refresh(req: Request, res: Response, next: NextFunction) {
+	async refresh(req: Request, res: Response) {
 		const {refreshToken} = req.cookies;
 
 		const userData = await authService.refresh(refreshToken);
@@ -41,7 +41,7 @@ class AuthController {
 		res.json(userData);
 	}
 
-	async activate(req: Request, res: Response, next: NextFunction) {
+	async activate(req: Request, res: Response) {
 		const {link} = req.params;
 
 		await authService.activate(link);

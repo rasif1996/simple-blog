@@ -2,13 +2,13 @@ import {Request, Response, NextFunction} from 'express';
 import userService from '@/services/user.service';
 
 class UserController {
-	async getUsers(req: Request, res: Response, next: NextFunction) {
+	async getUsers(req: Request, res: Response) {
 		const users = await userService.getUsers();
 
 		res.json(users);
 	}
 
-	async updateUser(req: Request, res: Response, next: NextFunction) {
+	async updateUser(req: Request, res: Response) {
 		let data = req.body.info ? JSON.parse(req.body.info) : {};
 		const image = req.files?.image;
 
@@ -27,19 +27,19 @@ class UserController {
 		res.json(info);
 	}
 
-	async getUser(req: Request, res: Response, next: NextFunction) {
+	async getUser(req: Request, res: Response) {
 		res.send('Getting a user');
 	}
 
-	async deleteUser(req: Request, res: Response, next: NextFunction) {
+	async deleteUser(req: Request, res: Response) {
 		res.send('Deleting a user');
 	}
 
-	async createUser(req: Request, res: Response, next: NextFunction) {
+	async createUser(req: Request, res: Response) {
 		res.send('Creating a user');
 	}
 
-	async getItemsOfUser(req: Request, res: Response, next: NextFunction) {
+	async getItemsOfUser(req: Request, res: Response) {
 		res.send('Get items of user');
 	}
 }
